@@ -1,12 +1,12 @@
 // @ts-check
 
-import js from '@eslint/js';
-import pluginQuery from '@tanstack/eslint-plugin-query';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import reactPlugin from 'eslint-plugin-react';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import globals from 'globals';
-import ts_eslint from 'typescript-eslint';
+import js from '@eslint/js'
+import pluginQuery from '@tanstack/eslint-plugin-query'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import reactPlugin from 'eslint-plugin-react'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import globals from 'globals'
+import ts_eslint from 'typescript-eslint'
 
 export default ts_eslint.config({
   extends: [
@@ -20,11 +20,11 @@ export default ts_eslint.config({
   files: ['**/*.{ts,tsx}'],
   ignores: ['dist', 'node_modules'],
   plugins: {
-    'react-refresh': reactRefresh,
+    'react-refresh': reactRefresh
   },
   languageOptions: {
     ecmaVersion: 2023,
-    globals: globals.browser,
+    globals: globals.browser
   },
   rules: {
     '@typescript-eslint/consistent-type-exports': 'error',
@@ -32,4 +32,4 @@ export default ts_eslint.config({
     '@typescript-eslint/consistent-type-assertions': 'error',
     '@typescript-eslint/consistent-type-definitions': 'error'
   }
-});
+})
