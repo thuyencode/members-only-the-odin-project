@@ -4,19 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -w src/server -x tsx src/server/main.ts",
-    "start": "NODE_ENV=production tsx src/server/main.ts",
+    "dev": "dotenvx run -f .env.development.local -- nodemon -w src/server -x tsx src/server/main.ts",
+    "start": "NODE_ENV=production dotenvx run -f .env.production.local -- tsx src/server/main.ts",
     "build": "vite build"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.14.2",
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsx": "^4.3.0",
+    "valibot": "^1.0.0-beta.0",
     "vite-express": "*"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.11.1",
     "@tanstack/eslint-plugin-query": "^5.58.1",
     "@types/eslint__js": "^8.42.3",
