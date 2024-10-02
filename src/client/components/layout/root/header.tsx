@@ -8,7 +8,7 @@ const Header = () => {
       </div>
 
       <div className='flex-none'>
-        <ul className='menu menu-horizontal items-center'>
+        <ul className='menu menu-horizontal items-center gap-1'>
           <li>
             <Link to='/'>Home</Link>
           </li>
