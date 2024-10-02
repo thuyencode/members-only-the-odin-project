@@ -1,6 +1,6 @@
 import express from 'express'
 import ViteExpress from 'vite-express'
-import env from './lib/utils/env.js'
+import env from './lib/utils/env'
 
 const PORT = env.PORT
 
