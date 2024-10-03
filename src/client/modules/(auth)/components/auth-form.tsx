@@ -38,7 +38,7 @@ const AuthForm: FunctionComponent<AuthFormProps> = ({ action = 'sign-in' }) => {
           <input type='password' placeholder='Password' defaultValue='' />
         </label>
 
-        <div className='flex justify-center gap-2.5 pt-2.5'>
+        <div className='flex justify-center gap-1 pt-2.5'>
           <button className='btn btn-primary gap-1' type='submit'>
             {action === 'sign-in' ? 'Sign in' : 'Sign up'}
 
