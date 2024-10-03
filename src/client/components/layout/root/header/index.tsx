@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import ThemeToggler from './theme-toggler'
 
 const Header = () => {
   return (
@@ -19,6 +20,10 @@ const Header = () => {
 
           <li>
             <Link to='/sign-in'>Sign In</Link>
+          </li>
+
+          <li>
+            <ThemeToggler />
           </li>
         </ul>
       </div>
