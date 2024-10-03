@@ -1,5 +1,6 @@
+import withClose from '@/client/components/hoc/with-close'
 import { Icon } from '@iconify/react'
-import { useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { themeChange } from 'theme-change'
 
 const TOGGLE_STATES = {
@@ -8,45 +9,47 @@ const TOGGLE_STATES = {
   dark: { name: 'dark', icon: 'ph:moon-fill', theme: 'dark' }
 }
 
-function ThemeToggler() {
-  const [toggleState, setToggleState] = useState(TOGGLE_STATES.default)
+const ThemeToggle = withClose(
+  forwardRef<HTMLDetailsElement>((_, ref) => {
+    const [toggleState, setToggleState] = useState(TOGGLE_STATES.default)
 
-  useEffect(() => {
-    themeChange(false)
-  }, [])
+    useEffect(() => {
+      themeChange(false)
+    }, [])
 
-  useEffect(() => {
-    const theme = localStorage.getItem('theme') as 'light' | 'dark' | ''
+    useEffect(() => {
+      const theme = localStorage.getItem('theme') as 'light' | 'dark' | ''
 
-    setToggleState(TOGGLE_STATES[theme === '' ? 'default' : theme])
-  }, [])
+      setToggleState(TOGGLE_STATES[theme === '' ? 'default' : theme])
+    }, [])
 
-  return (
-    <details className='dropdown-end md:dropdown'>
-      <summary className='gap-2 capitalize'>
-        <Icon className='text-xl' icon={toggleState.icon} />
-        {toggleState.name}
-      </summary>
+    return (
+      <details className='dropdown-end md:dropdown' ref={ref}>
+        <summary className='gap-2 capitalize'>
+          <Icon className='text-xl' icon={toggleState.icon} />
+          {toggleState.name}
+        </summary>
 
-      <ul className='border-base-content/50 md:menu md:dropdown-content md:z-[1] md:w-40 md:rounded-box md:border md:bg-base-300 md:p-2 md:shadow-lg'>
-        {Object.values(TOGGLE_STATES).map((state) => (
-          <li key={state.name}>
-            <button
-              className='capitalize'
-              data-set-theme={state.theme}
-              data-act-class='ACTIVECLASS'
-              onClick={() => {
-                setToggleState(state)
-              }}
-            >
-              <Icon className='text-xl' icon={state.icon} />
-              {state.name}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </details>
-  )
-}
+        <ul className='border-base-content/50 md:menu md:dropdown-content md:z-[1] md:w-40 md:rounded-box md:border md:bg-base-300 md:p-2 md:shadow-lg'>
+          {Object.values(TOGGLE_STATES).map((state) => (
+            <li key={state.name}>
+              <button
+                className='capitalize'
+                data-set-theme={state.theme}
+                data-act-class='ACTIVECLASS'
+                onClick={() => {
+                  setToggleState(state)
+                }}
+              >
+                <Icon className='text-xl' icon={state.icon} />
+                {state.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )
+  })
+)
 
-export default ThemeToggler
+export default ThemeToggle
