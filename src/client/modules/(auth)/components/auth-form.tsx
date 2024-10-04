@@ -48,7 +48,10 @@ const AuthForm: FunctionComponent<AuthFormProps> = ({ action = 'sign-in' }) => {
             />
           </button>
 
-          <Link className='btn btn-ghost font-medium' to='/sign-up'>
+          <Link
+            className='btn btn-ghost font-medium'
+            to={action === 'sign-in' ? '/sign-up' : '/sign-in'}
+          >
             {action === 'sign-in'
               ? 'I already have an account'
               : "I don't have an account"}
