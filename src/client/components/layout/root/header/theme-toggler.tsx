@@ -1,4 +1,4 @@
-import useCloseDialogElement from '@/client/hooks/useCloseDetailsElement.hook'
+import useCloseDialogElement from '@/client/hooks/useCloseDetailsElement'
 import { Icon } from '@iconify/react'
 import { useEffect, useState } from 'react'
 import { themeChange } from 'theme-change'
