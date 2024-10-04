@@ -11,7 +11,6 @@ const TOGGLE_STATES = {
 
 const ThemeToggle = () => {
   const ref = useCloseDialogElement()
-
   const [toggleState, setToggleState] = useState(TOGGLE_STATES.default)
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const ThemeToggle = () => {
   useEffect(() => {
     const theme = localStorage.getItem('theme') as 'light' | 'dark' | ''
 
-    setToggleState(TOGGLE_STATES[theme === '' ? 'default' : theme])
+    setToggleState(TOGGLE_STATES[!theme ? 'default' : theme])
   }, [])
 
   return (
