@@ -4,11 +4,11 @@ import ThemeToggler from './theme-toggler'
 const Header = () => {
   return (
     <header className='navbar h-8 border-b border-b-neutral/50 bg-base-100'>
-      <div className='flex-1'>
-        <a className='btn btn-ghost text-xl'>Members Only</a>
+      <div className='navbar-start'>
+        <h4 className='ml-2 font-bold'>Members Only</h4>
       </div>
 
-      <div className='flex-none'>
+      <div className='navbar-center'>
         <ul className='menu menu-horizontal items-center gap-1'>
           <li>
             <Link to='/'>Home</Link>
@@ -22,6 +22,16 @@ const Header = () => {
             <Link to='/sign-in'>Sign In</Link>
           </li>
 
+          <li>
+            <Link className='font-semibold text-primary' to='/new'>
+              New Message
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className='navbar-end'>
+        <ul className='menu menu-horizontal items-center'>
           <li>
             <ThemeToggler />
           </li>
