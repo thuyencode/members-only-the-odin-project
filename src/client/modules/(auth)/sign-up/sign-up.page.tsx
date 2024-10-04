@@ -1,4 +1,4 @@
-import AuthForm from '../components/auth-form'
+import { AuthForm } from '../components'
 
 const SignUpPage = () => {
   return <AuthForm action='sign-up' />
