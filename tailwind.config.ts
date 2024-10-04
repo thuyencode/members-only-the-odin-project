@@ -1,6 +1,7 @@
 import daisyui from 'daisyui'
 import daisyuiThemes from 'daisyui/src/theming/themes'
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -8,6 +9,9 @@ export default {
     extend: {
       container: {
         center: true
+      },
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans]
       }
     }
   },
