@@ -1,7 +1,7 @@
-import { AuthForm } from '../components'
+import { SignUpForm } from './component'
 
 const SignUpPage = () => {
-  return <AuthForm action='sign-up' />
+  return <SignUpForm />
 }
 
 export default SignUpPage
