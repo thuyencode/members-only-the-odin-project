@@ -1,18 +1,18 @@
-import { Icon } from '@iconify/react'
+import ShowMessages from './components/messages'
+import NoMessages from './components/no-messages'
+import messages from './db/messages.json'
 
 const HomePage = () => {
-  return (
-    <div className='space-y-6 text-center'>
-      <div className='space-y-2'>
-        <h2>There're no messages yet 📭️</h2>
-        <p>Why don't you be the first one to break the silence? ✍️💌</p>
-      </div>
+  const messagesWithDate = messages.map((message) => ({
+    ...message,
+    added_at: new Date(message.added_at)
+  }))
 
-      <button className='btn btn-primary mt-4 text-lg'>
-        New message <Icon className='text-lg' icon='mdi:message-plus' />
-      </button>
-    </div>
-  )
+  if (messagesWithDate.length) {
+    return <ShowMessages messages={messagesWithDate} />
+  } else {
+    return <NoMessages />
+  }
 }
 
 export default HomePage

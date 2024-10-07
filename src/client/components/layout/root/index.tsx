@@ -8,7 +8,7 @@ const RootLayout = () => {
     <>
       <Header />
 
-      <div className='container my-10 flex-1'>
+      <div className='container my-20 flex-1'>
         <Outlet />
       </div>
 
