@@ -35,7 +35,9 @@ const SignInForm = () => {
           name='username'
           children={(field) => (
             <div className='space-y-2.5'>
-              <label className='input input-bordered flex items-center gap-2'>
+              <label
+                className={`input input-bordered flex items-center gap-2 ${field.state.meta.errors.length && 'input-error'}`}
+              >
                 <Icon className='text-lg' icon='mdi:alternate-email' />
                 <input
                   name={field.name}
@@ -59,7 +61,9 @@ const SignInForm = () => {
           name='password'
           children={(field) => (
             <div className='space-y-2.5'>
-              <label className='input input-bordered flex items-center gap-2'>
+              <label
+                className={`input input-bordered flex items-center gap-2 ${field.state.meta.errors.length && 'input-error'}`}
+              >
                 <Icon className='text-lg' icon='mdi:key' />
                 <input
                   name={field.name}
@@ -68,7 +72,7 @@ const SignInForm = () => {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  minLength={2}
+                  minLength={8}
                   maxLength={30}
                   required
                 />

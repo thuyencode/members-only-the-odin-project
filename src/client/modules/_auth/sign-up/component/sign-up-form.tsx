@@ -36,7 +36,9 @@ const SignUpForm = () => {
           name='name'
           children={(field) => (
             <div className='space-y-2.5'>
-              <label className='input input-bordered flex items-center gap-2'>
+              <label
+                className={`input input-bordered flex items-center gap-2 ${field.state.meta.errors.length && 'input-error'}`}
+              >
                 <Icon className='text-lg' icon='mdi:user' />
                 <input
                   name={field.name}
@@ -45,7 +47,7 @@ const SignUpForm = () => {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  minLength={2}
+                  minLength={8}
                   maxLength={100}
                   required
                 />
@@ -60,7 +62,9 @@ const SignUpForm = () => {
           name='username'
           children={(field) => (
             <div className='space-y-2.5'>
-              <label className='input input-bordered flex items-center gap-2'>
+              <label
+                className={`input input-bordered flex items-center gap-2 ${field.state.meta.errors.length && 'input-error'}`}
+              >
                 <Icon className='text-lg' icon='mdi:alternate-email' />
                 <input
                   name={field.name}
@@ -84,7 +88,9 @@ const SignUpForm = () => {
           name='password'
           children={(field) => (
             <div className='space-y-2.5'>
-              <label className='input input-bordered flex items-center gap-2'>
+              <label
+                className={`input input-bordered flex items-center gap-2 ${field.state.meta.errors.length && 'input-error'}`}
+              >
                 <Icon className='text-lg' icon='mdi:key' />
                 <input
                   name={field.name}
