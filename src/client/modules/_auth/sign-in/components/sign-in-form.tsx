@@ -1,10 +1,10 @@
+import { FieldInfo } from '@/client/components'
 import { capitalize } from '@/client/libs/utils'
 import { SignInSchema } from '@/shared/schemas/auth.schema'
 import { Icon } from '@iconify/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-form-adapter'
-import { FieldInfo } from '../../components'
 
 const SignInForm = () => {
   const form = useForm({

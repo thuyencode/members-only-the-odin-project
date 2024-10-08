@@ -1,5 +1,5 @@
-import TanStackRouterDevtools from '@/client/components/dev-tools'
 import { Outlet } from '@tanstack/react-router'
+import TanStackRouterDevtools from '../../dev-tools'
 import Footer from './footer'
 import Header from './header'
 
