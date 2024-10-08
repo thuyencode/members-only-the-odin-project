@@ -35,17 +35,22 @@ const NewMessageForm = () => {
           validators={{ onSubmit: MessageSchema }}
           children={(field) => (
             <>
-              <TextareaAutosize
-                className={`textarea textarea-bordered min-h-28 ${field.state.meta.errors.length && 'textarea-error'} w-full`}
-                name={field.name}
-                placeholder={capitalize(field.name)}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                minLength={10}
-                maxLength={255}
-                required
-              />
+              <div className='textarea-bordered rounded-lg border'>
+                <TextareaAutosize
+                  className={`textarea min-h-28 ${field.state.meta.errors.length && 'textarea-error'} w-full`}
+                  name={field.name}
+                  placeholder={capitalize(field.name)}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  minLength={10}
+                  maxLength={255}
+                  required
+                />
+                <div className='pb-1 pr-2 text-right'>
+                  {field.state.value.length}/255
+                </div>
+              </div>
 
               <FieldInfo field={field} />
             </>
