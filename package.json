@@ -17,6 +17,7 @@
     "express": "^4.21.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-textarea-autosize": "^8.5.3",
     "tsx": "^4.19.1",
     "valibot": "^0.42.1",
     "vite-express": "*"

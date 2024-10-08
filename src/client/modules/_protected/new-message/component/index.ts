@@ -1,3 +1,3 @@
-import NewMessageForm from './new-message-for'
+import NewMessageForm from './new-message-form'
 
 export { NewMessageForm }

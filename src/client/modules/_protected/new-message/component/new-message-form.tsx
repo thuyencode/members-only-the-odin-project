@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-form-adapter'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const NewMessageForm = () => {
   const form = useForm({
@@ -34,8 +35,8 @@ const NewMessageForm = () => {
           validators={{ onSubmit: MessageSchema }}
           children={(field) => (
             <>
-              <textarea
-                className={`textarea textarea-bordered ${field.state.meta.errors.length && 'textarea-error'} w-full`}
+              <TextareaAutosize
+                className={`textarea textarea-bordered min-h-28 ${field.state.meta.errors.length && 'textarea-error'} w-full`}
                 name={field.name}
                 placeholder={capitalize(field.name)}
                 value={field.state.value}
@@ -44,7 +45,7 @@ const NewMessageForm = () => {
                 minLength={10}
                 maxLength={255}
                 required
-              ></textarea>
+              />
 
               <FieldInfo field={field} />
             </>

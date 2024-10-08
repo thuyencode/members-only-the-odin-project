@@ -26,7 +26,8 @@
     },
     "markdownlint.config": {
       "MD033": false
-    }
+    },
+    "cSpell.words": ["Autosize"]
   },
   "extensions": {
     "recommendations": [
