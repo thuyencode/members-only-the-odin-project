@@ -44,11 +44,11 @@ const NewMessageForm = () => {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   minLength={10}
-                  maxLength={255}
+                  maxLength={500}
                   required
                 />
                 <div className='pb-1 pr-2 text-right'>
-                  {field.state.value.length}/255
+                  {field.state.value.length}/500
                 </div>
               </div>
 
