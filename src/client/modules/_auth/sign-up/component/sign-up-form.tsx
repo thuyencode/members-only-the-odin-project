@@ -21,7 +21,7 @@ const SignUpForm = () => {
   })
 
   return (
-    <div className='max-w -md mx-auto space-y-10'>
+    <div className='mx-auto max-w-md space-y-10'>
       <h2 className='text-center'>Sign up a new account</h2>
 
       <form
