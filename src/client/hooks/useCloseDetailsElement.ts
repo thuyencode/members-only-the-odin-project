@@ -10,13 +10,13 @@ const useCloseDialogElement = () => {
 
     const detailsElement = ref.current
 
-    function handleKeydown(e: KeyboardEvent) {
+    const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && detailsElement.open) {
         detailsElement.open = false
       }
     }
 
-    function handleClick(e: MouseEvent) {
+    const handleClick = (e: MouseEvent) => {
       if (!detailsElement.contains(e.target as HTMLElement)) {
         detailsElement.open = false
       }
