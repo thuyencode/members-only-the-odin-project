@@ -10,6 +10,8 @@ const NonEmptyStringSchema = v.pipe(v.string(), v.nonEmpty())
 
 const EnvSchema = v.object({
   PORT: StringToNumberSchema,
+  JWT_SECRET: v.pipe(NonEmptyStringSchema, v.minLength(15)),
+  COOKIE_SECRET: v.pipe(NonEmptyStringSchema, v.minLength(15)),
   PGHOST: NonEmptyStringSchema,
   PGPORT: NonEmptyStringSchema,
   PGUSER: NonEmptyStringSchema,
