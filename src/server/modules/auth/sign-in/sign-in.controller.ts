@@ -7,7 +7,7 @@ import expressAsyncHandler from 'express-async-handler'
 import jwt from 'jsonwebtoken'
 import * as v from 'valibot'
 
-export const handleSignInRequest = expressAsyncHandler(async (req, res) => {
+const handleSignInRequest = expressAsyncHandler(async (req, res) => {
   try {
     const signInInput = v.parse(SignInSchema, req.body)
 
@@ -51,3 +51,9 @@ export const handleSignInRequest = expressAsyncHandler(async (req, res) => {
     throw error
   }
 })
+
+const SignInController = {
+  handleSignInRequest
+}
+
+export default SignInController

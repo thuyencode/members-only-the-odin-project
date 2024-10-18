@@ -6,7 +6,13 @@ declare module 'jsonwebtoken' {
 
 declare module 'express' {
   export interface Request {
-    signedCookies: { token?: string }
+    signedCookies: { refresh_token?: string }
+  }
+}
+
+declare module 'express-serve-static-core' {
+  export interface Request {
+    user?: Omit<User, 'salted_hash'>
   }
 }
 

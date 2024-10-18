@@ -1,8 +1,8 @@
 import e from 'express'
-import { handleSignInRequest } from './sign-in.controller'
+import SignInController from './sign-in.controller'
 
 const sign_in_routes = e.Router()
 
-sign_in_routes.post('/', handleSignInRequest)
+sign_in_routes.post('/', SignInController.handleSignInRequest)
 
 export default sign_in_routes

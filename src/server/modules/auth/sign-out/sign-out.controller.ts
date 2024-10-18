@@ -1,5 +1,11 @@
-import expressAsyncHandler from 'express-async-handler'
+import type e from 'express'
 
-export const handleSignOutRequest = expressAsyncHandler(async (_, res) => {
+const handleSignOutRequest = (_: e.Request, res: e.Response) => {
   res.clearCookie('refresh_token').send()
-})
+}
+
+const SignOutController = {
+  handleSignOutRequest
+}
+
+export default SignOutController
