@@ -32,9 +32,15 @@ export const handleSignInRequest = expressAsyncHandler(async (req, res) => {
       { expiresIn: '90 days' }
     )
 
+    const accessToken = jwt.sign(
+      { ...user, salted_hash: undefined },
+      env.JWT_SECRET,
+      { expiresIn: '1h' }
+    )
+
     res
       .cookie('refresh_token', refreshToken, { httpOnly: true, signed: true })
-      .send()
+      .json({ accessToken })
   } catch (error) {
     if (v.isValiError(error)) {
       const issues = v.flatten(error.issues).nested
