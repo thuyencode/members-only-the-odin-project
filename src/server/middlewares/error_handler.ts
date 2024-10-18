@@ -2,12 +2,12 @@
 import type e from 'express'
 import { HttpError, InternalServerError } from '../errors'
 
-function error_handler(
+const error_handler = (
   err: unknown,
   _req: e.Request,
   res: e.Response,
   _next: e.NextFunction
-) {
+) => {
   try {
     if (err instanceof HttpError) {
       if (err instanceof InternalServerError) {

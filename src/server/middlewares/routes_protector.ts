@@ -4,11 +4,11 @@ import BadRequest from '../errors/BadRequest'
 import Unauthorized from '../errors/Unauthorized'
 import env from '../libs/utils/env'
 
-function routes_protector(
+const routes_protector = (
   req: e.Request,
   res: e.Response,
   next: e.NextFunction
-) {
+) => {
   try {
     const refreshToken = req.signedCookies.refresh_token
 
