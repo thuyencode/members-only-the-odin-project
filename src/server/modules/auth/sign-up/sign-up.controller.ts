@@ -1,10 +1,9 @@
 import Users from '@/server/db/users.db'
 import BadRequest from '@/server/errors/BadRequest'
-import env from '@/server/libs/utils/env'
+import { generateTokens } from '@/server/libs/utils/auth'
 import { SignUpSchema } from '@/shared/schemas/auth.schema'
 import { hash } from '@node-rs/bcrypt'
 import expressAsyncHandler from 'express-async-handler'
-import jwt from 'jsonwebtoken'
 import * as v from 'valibot'
 
 const handleSignUpRequest = expressAsyncHandler(async (req, res) => {
@@ -24,20 +23,10 @@ const handleSignUpRequest = expressAsyncHandler(async (req, res) => {
       salted_hash: await hash(signUpInput.password, 10)
     })
 
-    const refreshToken = jwt.sign(
-      { ...newUser, salted_hash: undefined },
-      env.JWT_SECRET,
-      { expiresIn: '90 days' }
-    )
-
-    const accessToken = jwt.sign(
-      { ...newUser, salted_hash: undefined },
-      env.JWT_SECRET,
-      { expiresIn: '1h' }
-    )
+    const { refreshToken, accessToken } = generateTokens(newUser)
 
     res
-      .cookie('refresh_token', refreshToken, { httpOnly: true })
+      .cookie('refresh_token', refreshToken, { httpOnly: true, signed: true })
       .json({ accessToken })
   } catch (error) {
     if (v.isValiError(error)) {

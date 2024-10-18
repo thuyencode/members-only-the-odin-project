@@ -1,10 +1,9 @@
 import Users from '@/server/db/users.db'
 import BadRequest from '@/server/errors/BadRequest'
-import env from '@/server/libs/utils/env'
+import { generateTokens } from '@/server/libs/utils/auth'
 import { SignInSchema } from '@/shared/schemas/auth.schema'
 import bcrypt from '@node-rs/bcrypt'
 import expressAsyncHandler from 'express-async-handler'
-import jwt from 'jsonwebtoken'
 import * as v from 'valibot'
 
 const handleSignInRequest = expressAsyncHandler(async (req, res) => {
@@ -26,17 +25,7 @@ const handleSignInRequest = expressAsyncHandler(async (req, res) => {
       throw new BadRequest(`Incorrect password`)
     }
 
-    const refreshToken = jwt.sign(
-      { ...user, salted_hash: undefined },
-      env.JWT_SECRET,
-      { expiresIn: '90 days' }
-    )
-
-    const accessToken = jwt.sign(
-      { ...user, salted_hash: undefined },
-      env.JWT_SECRET,
-      { expiresIn: '1h' }
-    )
+    const { refreshToken, accessToken } = generateTokens(user)
 
     res
       .cookie('refresh_token', refreshToken, { httpOnly: true, signed: true })
