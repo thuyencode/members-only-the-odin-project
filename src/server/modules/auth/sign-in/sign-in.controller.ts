@@ -26,13 +26,15 @@ export const handleSignInRequest = expressAsyncHandler(async (req, res) => {
       throw new BadRequest(`Incorrect password`)
     }
 
-    const token = jwt.sign(
+    const refreshToken = jwt.sign(
       { ...user, salted_hash: undefined },
       env.JWT_SECRET,
-      { expiresIn: '1s' }
+      { expiresIn: '90 days' }
     )
 
-    res.cookie('token', token, { httpOnly: true, signed: true }).send()
+    res
+      .cookie('refresh_token', refreshToken, { httpOnly: true, signed: true })
+      .send()
   } catch (error) {
     if (v.isValiError(error)) {
       const issues = v.flatten(error.issues).nested

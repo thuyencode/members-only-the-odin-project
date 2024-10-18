@@ -24,13 +24,13 @@ export const handleSignUpRequest = expressAsyncHandler(async (req, res) => {
       salted_hash: await hash(signUpInput.password, 10)
     })
 
-    const token = jwt.sign(
+    const refreshToken = jwt.sign(
       { ...newUser, salted_hash: undefined },
       env.JWT_SECRET,
-      { expiresIn: '1s' }
+      { expiresIn: '90 days' }
     )
 
-    res.cookie('token', token, { httpOnly: true }).send()
+    res.cookie('refresh_token', refreshToken, { httpOnly: true }).send()
   } catch (error) {
     if (v.isValiError(error)) {
       const issues = v.flatten(error.issues).nested
