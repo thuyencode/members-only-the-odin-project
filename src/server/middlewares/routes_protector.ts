@@ -10,16 +10,22 @@ const routes_protector = (
   next: e.NextFunction
 ) => {
   try {
-    const refreshToken = req.signedCookies.refresh_token
+    const accessToken = req.headers.authorization?.split(' ')[1]
 
-    if (!refreshToken) {
+    if (!accessToken) {
       throw new Unauthorized()
     }
 
-    const decoded = jwt.verify(refreshToken, env.JWT_SECRET)
+    const decoded = jwt.verify(accessToken, env.JWT_SECRET)
 
     if (typeof decoded === 'string') {
       throw new BadRequest("jwt doesn't contains needed info")
+    }
+
+    req.user = {
+      id: decoded.id,
+      name: decoded.name,
+      username: decoded.username
     }
 
     next()
