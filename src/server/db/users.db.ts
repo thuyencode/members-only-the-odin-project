@@ -12,7 +12,7 @@ const selectByUsername = async (
   return rows[0]
 }
 
-const selectUserById = async (id: number): Promise<User | undefined> => {
+const selectById = async (id: number): Promise<User | undefined> => {
   const { rows } = await pool.query<User>('SELECT * FROM users WHERE id = $1', [
     id
   ])
@@ -20,7 +20,7 @@ const selectUserById = async (id: number): Promise<User | undefined> => {
   return rows[0]
 }
 
-const insertUser = async ({
+const insert = async ({
   name,
   username,
   salted_hash
@@ -35,8 +35,8 @@ const insertUser = async ({
 
 const Users = {
   selectByUsername,
-  selectUserById,
-  insertUser
+  selectById,
+  insert
 }
 
 export default Users
