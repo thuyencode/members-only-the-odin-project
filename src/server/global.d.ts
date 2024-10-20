@@ -1,7 +1,7 @@
 import { User } from '@/shared/types'
 
 declare module 'jsonwebtoken' {
-  export type JwtPayload = Omit<User, 'salted_hash'>
+  export interface JwtPayload extends Omit<User, 'salted_hash'> {}
 }
 
 declare module 'express' {
