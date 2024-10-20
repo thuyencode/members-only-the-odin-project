@@ -7,6 +7,15 @@ CREATE TABLE IF NOT EXISTS
     name VARCHAR(100),
     username VARCHAR(25),
     salted_hash VARCHAR(500)
+);
+
+CREATE TABLE IF NOT EXISTS
+  messages (
+    id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    create_time DATE DEFAULT NOW(),
+    message VARCHAR(255),
+    user_id INT NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id)
 );`
 
 const main = async () => {
