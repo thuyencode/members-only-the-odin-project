@@ -1,4 +1,4 @@
-import { httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 import HttpError from './HttpError'
 
 /**
