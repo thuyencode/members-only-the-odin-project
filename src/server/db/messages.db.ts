@@ -1,4 +1,4 @@
-import { Message, User } from '@/shared/types'
+import { Message, MessageResponse } from '@/shared/types'
 import pool from './pool'
 
 const selectByUserId = async (userId: number): Promise<Message[]> => {
@@ -33,7 +33,7 @@ const selectAll = async (limit?: number): Promise<Message[]> => {
 
 const selectJoinUsersTable = async (
   limit: number = 0
-): Promise<(Message & Omit<User, 'salted_hash'>)[]> => {
+): Promise<MessageResponse[]> => {
   let sqlQuery = `
 SELECT
   messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
@@ -44,16 +44,29 @@ JOIN users ON messages.user_id = users.id`
     sqlQuery += ` LIMIT ${limit}`
   }
 
-  const { rows } = await pool.query<Message & Omit<User, 'salted_hash'>>(
-    sqlQuery
-  )
+  const { rows } = await pool.query<MessageResponse>(sqlQuery)
 
   return rows
 }
 
 const selectByIdJoinUsersTable = async (
   id: number
-): Promise<(Message & Omit<User, 'salted_hash'>) | undefined> => {
+): Promise<MessageResponse | undefined> => {
+  let sqlQuery = `
+SELECT
+  messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
+FROM messages
+JOIN users ON messages.user_id = users.id
+WHERE messages.id = $1`
+
+  const { rows } = await pool.query<MessageResponse>(sqlQuery, [id])
+
+  return rows[0]
+}
+
+const selectByUserIdJoinUsersTable = async (
+  id: number
+): Promise<MessageResponse | undefined> => {
   let sqlQuery = `
 SELECT
   messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
@@ -61,10 +74,7 @@ FROM messages
 JOIN users ON messages.user_id = users.id
 WHERE messages.user_id = $1`
 
-  const { rows } = await pool.query<Message & Omit<User, 'salted_hash'>>(
-    sqlQuery,
-    [id]
-  )
+  const { rows } = await pool.query<MessageResponse>(sqlQuery, [id])
 
   return rows[0]
 }
@@ -74,7 +84,7 @@ const insert = async ({
   user_id
 }: Omit<Message, 'id' | 'create_time'>): Promise<Message> => {
   const { rows } = await pool.query<Message>(
-    'INSERT INTO messages (message, user_id) VALUES ($1::text, $2::text, $3::text) RETURNING *;',
+    'INSERT INTO messages (message, user_id) VALUES ($1, $2) RETURNING *;',
     [message, user_id]
   )
 
@@ -96,6 +106,7 @@ const Messages = {
   selectAll,
   selectJoinUsersTable,
   selectByIdJoinUsersTable,
+  selectByUserIdJoinUsersTable,
   insert,
   deleteById
 }

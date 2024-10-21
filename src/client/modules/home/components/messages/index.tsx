@@ -1,17 +1,17 @@
+import { MessageResponse } from '@/shared/types'
 import { FunctionComponent } from 'react'
-import { IMessage } from '../../types'
-import Message from './message'
+import MessageComp from './message'
 
 interface ShowMessagesProps {
-  messages: IMessage[]
+  messages: MessageResponse[]
 }
 
 const ShowMessages: FunctionComponent<ShowMessagesProps> = ({ messages }) => {
   return (
     <div className='space-y-5'>
       {messages.map((message) => (
-        <Message
-          key={`${message.username}+${message.added_at.toString()}`}
+        <MessageComp
+          key={`${message.username}+${message.create_time.toString()}`}
           {...message}
         />
       ))}

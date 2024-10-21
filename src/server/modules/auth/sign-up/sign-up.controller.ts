@@ -18,7 +18,7 @@ const handleSignUpRequest = expressAsyncHandler(async (req, res) => {
       )
     }
 
-    const newUser = await Users.insertUser({
+    const newUser = await Users.insert({
       ...signUpInput,
       salted_hash: await hash(signUpInput.password, 10)
     })

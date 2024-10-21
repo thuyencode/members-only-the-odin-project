@@ -1,6 +1,8 @@
 import type e from 'express'
 
-const handleSignOutRequest = (_: e.Request, res: e.Response) => {
+const handleSignOutRequest = (req: e.Request, res: e.Response) => {
+  req.user = undefined
+
   res.clearCookie('refresh_token').send()
 }
 

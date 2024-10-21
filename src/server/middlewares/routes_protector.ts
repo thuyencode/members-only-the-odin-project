@@ -34,11 +34,11 @@ const routes_protector = (
       error instanceof jwt.TokenExpiredError ||
       error instanceof jwt.NotBeforeError
     ) {
-      throw new Unauthorized(error.message)
+      throw new Unauthorized(error)
     }
 
     if (error instanceof jwt.JsonWebTokenError) {
-      throw new BadRequest(error.message)
+      throw new BadRequest(error)
     }
 
     throw error
