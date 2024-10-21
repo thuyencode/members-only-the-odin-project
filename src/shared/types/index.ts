@@ -10,5 +10,7 @@ export interface User extends Omit<SignUpInput, 'password'> {
 export interface Message extends v.InferInput<typeof NewMessageInputSchema> {
   id: number
   user_id: number
-  create_time: Date
+  create_time: string
 }
+
+export type MessageResponse = Message & Omit<User, 'salted_hash' | 'id'>
