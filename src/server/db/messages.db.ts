@@ -1,4 +1,4 @@
-import { Message, MessageResponse } from '@/shared/types'
+import type { Message, MessageResponse } from '@/shared/types'
 import pool from './pool'
 
 const selectByUserId = async (userId: number): Promise<Message[]> => {
@@ -52,7 +52,7 @@ JOIN users ON messages.user_id = users.id`
 const selectByIdJoinUsersTable = async (
   id: number
 ): Promise<MessageResponse | undefined> => {
-  let sqlQuery = `
+  const sqlQuery = `
 SELECT
   messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
 FROM messages
@@ -67,7 +67,7 @@ WHERE messages.id = $1`
 const selectByUserIdJoinUsersTable = async (
   id: number
 ): Promise<MessageResponse | undefined> => {
-  let sqlQuery = `
+  const sqlQuery = `
 SELECT
   messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
 FROM messages

@@ -1,4 +1,4 @@
-import { HttpStatus } from 'http-status-ts'
+import type { HttpStatus } from 'http-status-ts'
 
 /**
  * Custom HTTP error extends from this class
@@ -9,13 +9,9 @@ import { HttpStatus } from 'http-status-ts'
  */
 class HttpError extends Error {
   statusCode: HttpStatus
-  cause: Error | string | unknown
+  cause?: Error | string
 
-  constructor(
-    message: string,
-    statusCode: HttpStatus,
-    cause?: Error | string | unknown
-  ) {
+  constructor(message: string, statusCode: HttpStatus, cause?: Error | string) {
     super(message)
     this.statusCode = statusCode
     this.cause = cause

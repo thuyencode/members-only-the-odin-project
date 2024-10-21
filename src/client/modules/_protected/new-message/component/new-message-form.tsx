@@ -1,6 +1,6 @@
 import { FieldInfo } from '@/client/components'
 import { capitalize } from '@/client/libs/utils'
-import { MessageSchema } from '@/shared/schemas/message.schema'
+import { NewMessageInputSchema } from '@/shared/schemas/message.schema'
 import { Icon } from '@iconify/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
@@ -12,7 +12,9 @@ const NewMessageForm = () => {
     defaultValues: {
       message: ''
     },
-    onSubmit: async ({ value }) => {
+    validatorAdapter: valibotValidator(),
+    validators: { onSubmit: NewMessageInputSchema },
+    onSubmit: ({ value }) => {
       console.log(value)
     }
   })
@@ -26,13 +28,11 @@ const NewMessageForm = () => {
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
-          form.handleSubmit()
+          void form.handleSubmit()
         }}
       >
         <form.Field
           name='message'
-          validatorAdapter={valibotValidator()}
-          validators={{ onSubmit: MessageSchema }}
           children={(field) => (
             <>
               <div className='textarea-bordered rounded-lg border'>

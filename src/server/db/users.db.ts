@@ -1,4 +1,4 @@
-import { User } from '@/shared/types'
+import type { User } from '@/shared/types'
 import pool from './pool'
 
 const selectByUsername = async (

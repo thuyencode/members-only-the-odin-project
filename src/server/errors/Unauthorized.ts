@@ -12,8 +12,7 @@ class Unauthorized extends HttpError {
   constructor(
     cause:
       | Error
-      | string
-      | unknown = `${httpStatusTextByCode(HttpStatus.UNAUTHORIZED)} request`
+      | string = `${httpStatusTextByCode(HttpStatus.UNAUTHORIZED)} request`
   ) {
     super(
       httpStatusTextByCode(HttpStatus.UNAUTHORIZED),

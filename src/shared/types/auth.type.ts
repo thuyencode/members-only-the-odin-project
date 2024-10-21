@@ -1,5 +1,5 @@
-import * as v from 'valibot'
-import { SignInSchema, SignUpSchema } from '../schemas/auth.schema'
+import type * as v from 'valibot'
+import type { SignInSchema, SignUpSchema } from '../schemas/auth.schema'
 
 export type SignUpInput = v.InferInput<typeof SignUpSchema>
 

@@ -1,5 +1,5 @@
-import { MessageResponse } from '@/shared/types'
-import { FunctionComponent } from 'react'
+import type { MessageResponse } from '@/shared/types'
+import type { FunctionComponent } from 'react'
 import MessageComp from './message'
 
 interface ShowMessagesProps {

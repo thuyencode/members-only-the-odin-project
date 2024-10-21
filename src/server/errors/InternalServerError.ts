@@ -1,4 +1,4 @@
-import { httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 import HttpError from './HttpError'
 
 /**
@@ -9,7 +9,7 @@ import HttpError from './HttpError'
  * @extends {HttpError}
  */
 class InternalServerError extends HttpError {
-  constructor(cause: Error | string | unknown) {
+  constructor(cause: Error | string) {
     super(
       httpStatusTextByCode(HttpStatus.INTERNAL_SERVER_ERROR),
       HttpStatus.INTERNAL_SERVER_ERROR,

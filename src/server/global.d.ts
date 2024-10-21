@@ -1,6 +1,7 @@
-import { User } from '@/shared/types'
+import type { User } from '@/shared/types'
 
 declare module 'jsonwebtoken' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   export interface JwtPayload extends Omit<User, 'salted_hash'> {}
 }
 

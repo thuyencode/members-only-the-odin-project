@@ -1,8 +1,10 @@
 // https://tanstack.com/form/latest/docs/overview#enough-talk-show-me-some-code-already
-import { FieldApi } from '@tanstack/react-form'
-import { FunctionComponent, useId } from 'react'
+import type { FieldApi } from '@tanstack/react-form'
+import type { FunctionComponent } from 'react'
+import { useId } from 'react'
 
 interface FieldInfoProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: FieldApi<any, any, any, any>
 }
 

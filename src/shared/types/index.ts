@@ -1,6 +1,6 @@
-import * as v from 'valibot'
-import { NewMessageInputSchema } from '../schemas/message.schema'
-import { SignUpInput } from './auth.type'
+import type * as v from 'valibot'
+import type { NewMessageInputSchema } from '../schemas/message.schema'
+import type { SignUpInput } from './auth.type'
 
 export interface User extends Omit<SignUpInput, 'password'> {
   id: number

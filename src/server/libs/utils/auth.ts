@@ -1,4 +1,4 @@
-import { User } from '@/shared/types'
+import type { User } from '@/shared/types'
 import jwt from 'jsonwebtoken'
 import env from './env'
 

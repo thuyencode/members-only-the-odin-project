@@ -1,4 +1,4 @@
-import { SignInInput, SignUpInput } from '@/shared/types/auth.type'
+import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
 import baseApi from './baseApi'
 
 const authApi = baseApi.extend((options) => ({

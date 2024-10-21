@@ -15,7 +15,7 @@ const SignUpForm = () => {
     },
     validatorAdapter: valibotValidator(),
     validators: { onSubmit: SignUpSchema },
-    onSubmit: async ({ value }) => {
+    onSubmit: ({ value }) => {
       console.log(value)
     }
   })
@@ -29,7 +29,7 @@ const SignUpForm = () => {
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
-          form.handleSubmit()
+          void form.handleSubmit()
         }}
       >
         <form.Field
