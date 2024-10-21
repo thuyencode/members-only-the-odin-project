@@ -51,8 +51,6 @@ const getMessageById = expressAsyncHandler(async (req, res) => {
 
     const accessToken = req.headers.authorization?.split(' ')[1]
 
-    console.log('Here')
-
     if (!accessToken) {
       message = { ...message, name: 'Anonymous', username: 'anonymous' }
     } else {
