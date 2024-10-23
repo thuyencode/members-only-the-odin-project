@@ -13,7 +13,7 @@ const getNewAccessToken = (req: e.Request, res: e.Response) => {
       throw new Unauthorized()
     }
 
-    const decoded = jwt.verify(refreshToken, env.JWT_SECRET)
+    const decoded = jwt.verify(refreshToken, env.REFRESH_TOKEN_SECRET)
 
     if (typeof decoded === 'string') {
       throw new BadRequest("jwt doesn't contains needed info")

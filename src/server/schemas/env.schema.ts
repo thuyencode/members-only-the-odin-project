@@ -8,9 +8,12 @@ const StringToNumberSchema = v.pipe(
 )
 const NonEmptyStringSchema = v.pipe(v.string(), v.nonEmpty())
 
+const SecretKeySchema = v.pipe(NonEmptyStringSchema, v.minLength(15))
+
 const EnvSchema = v.object({
   PORT: StringToNumberSchema,
-  JWT_SECRET: v.pipe(NonEmptyStringSchema, v.minLength(15)),
+  REFRESH_TOKEN_SECRET: SecretKeySchema,
+  ACCESS_TOKEN_SECRET: SecretKeySchema,
   COOKIE_SECRET: v.pipe(NonEmptyStringSchema, v.minLength(15)),
   PGHOST: NonEmptyStringSchema,
   PGPORT: NonEmptyStringSchema,

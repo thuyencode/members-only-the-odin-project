@@ -16,7 +16,7 @@ const routes_protector = (
       throw new Unauthorized()
     }
 
-    const decoded = jwt.verify(accessToken, env.JWT_SECRET)
+    const decoded = jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET)
 
     if (typeof decoded === 'string') {
       throw new BadRequest("jwt doesn't contains needed info")

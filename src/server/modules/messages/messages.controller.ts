@@ -19,7 +19,7 @@ const getAllMessages = expressAsyncHandler(async (req, res) => {
         username: 'anonymous'
       }))
     } else {
-      const decoded = jwt.verify(accessToken, env.JWT_SECRET)
+      const decoded = jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET)
 
       if (typeof decoded === 'string') {
         throw new BadRequest("jwt doesn't contains needed info")
@@ -54,7 +54,7 @@ const getMessageById = expressAsyncHandler(async (req, res) => {
     if (!accessToken) {
       message = { ...message, name: 'Anonymous', username: 'anonymous' }
     } else {
-      const decoded = jwt.verify(accessToken, env.JWT_SECRET)
+      const decoded = jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET)
 
       if (typeof decoded === 'string') {
         throw new BadRequest("jwt doesn't contains needed info")
