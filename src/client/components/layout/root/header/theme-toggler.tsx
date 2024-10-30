@@ -27,7 +27,7 @@ const ThemeToggle = () => {
     <details className='dropdown-end md:dropdown' ref={ref}>
       <summary className='gap-2 capitalize'>
         <Icon className='text-xl' icon={toggleState.icon} />
-        {toggleState.name}
+        <span className='max-md:hidden'>{toggleState.name}</span>
       </summary>
 
       <ul className='border-base-content/50 md:menu md:dropdown-content md:z-[1] md:w-40 md:rounded-box md:border md:bg-base-300 md:p-2 md:shadow-lg'>

@@ -1,9 +1,11 @@
 import useAuth from '@/client/hooks/use-auth'
+import useSignOut from '@/client/hooks/use-sign-out'
 import { Link } from '@tanstack/react-router'
 import ThemeToggler from './theme-toggler'
 
 const Header = () => {
-  const { isAuthenticated, signOut, user } = useAuth()
+  const { isAuthenticated, user } = useAuth()
+  const { signOut } = useSignOut()
 
   return (
     <header className='navbar h-8 border-b border-b-neutral/50 bg-base-100'>

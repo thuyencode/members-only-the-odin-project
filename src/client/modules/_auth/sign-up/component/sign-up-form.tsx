@@ -1,6 +1,6 @@
 import { FieldInfo } from '@/client/components'
 import ErrorDialog from '@/client/components/error-dialog'
-import useAuth from '@/client/hooks/use-auth'
+import useSignUp from '@/client/hooks/use-sign-up'
 import { capitalize } from '@/client/libs/utils'
 import { SignUpSchema } from '@/shared/schemas/auth.schema'
 import { Icon } from '@iconify/react'
@@ -9,7 +9,7 @@ import { Link } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-form-adapter'
 
 const SignUpForm = () => {
-  const { signUp, signUpError, isSignUpError } = useAuth()
+  const { signUp, signUpError, isSignUpError } = useSignUp()
 
   const form = useForm({
     defaultValues: {

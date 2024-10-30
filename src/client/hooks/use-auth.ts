@@ -1,18 +1,12 @@
 import type { User } from '@/shared/types'
-import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { redirect, useRouter } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
 import type { JwtPayload } from 'jsonwebtoken'
 import { jwtDecode } from 'jwt-decode'
 import { useEffect, useMemo } from 'react'
 import { getAccessTokenApi } from '../libs/api'
-import { postSignInRequest, postSignUpRequest } from '../libs/api/auth.api'
 import { QUERY_KEYS, SESSION_STORAGE_KEYS } from '../libs/constants'
 
 const useAuth = () => {
-  const queryClient = useQueryClient()
-  const router = useRouter()
-
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.AUTH],
     queryFn: getAccessTokenApi,
@@ -56,57 +50,9 @@ const useAuth = () => {
     return user
   }, [data])
 
-  const signUpMutation = useMutation({
-    mutationFn: async (signUpInput: SignUpInput) =>
-      await postSignUpRequest(signUpInput),
-    onSuccess: async (data) => {
-      queryClient.setQueryData([QUERY_KEYS.AUTH], data)
-
-      await router.invalidate()
-      await router.navigate({ to: '/' })
-    },
-    onError: async () => {
-      queryClient.setQueryData([QUERY_KEYS.AUTH], null)
-      await router.invalidate()
-    }
-  })
-
-  const signInMutation = useMutation({
-    mutationFn: async (signInInput: SignInInput) =>
-      await postSignInRequest(signInInput),
-    onSuccess: async (data) => {
-      queryClient.setQueryData([QUERY_KEYS.AUTH], data)
-
-      await router.invalidate()
-      await router.navigate({ to: '/' })
-    },
-    onError: async () => {
-      queryClient.setQueryData([QUERY_KEYS.AUTH], null)
-      await router.invalidate()
-    }
-  })
-
-  const signOut = async () => {
-    queryClient.setQueryData([QUERY_KEYS.AUTH], null)
-
-    await router.invalidate()
-    await redirect({ to: '/' })
-  }
-
   const isAuthenticated = Boolean(user)
 
-  return {
-    user,
-    signUpMutation,
-    signIn: signInMutation.mutateAsync,
-    signInError: signInMutation.error,
-    isSignInError: signInMutation.isError,
-    signUp: signUpMutation.mutateAsync,
-    signUpError: signUpMutation.error,
-    isSignUpError: signUpMutation.isError,
-    signOut,
-    isAuthenticated
-  }
+  return { user, isAuthenticated }
 }
 
 export default useAuth

@@ -1,6 +1,6 @@
 import { FieldInfo } from '@/client/components'
 import ErrorDialog from '@/client/components/error-dialog'
-import useAuth from '@/client/hooks/use-auth'
+import useSignIn from '@/client/hooks/use-sign-in'
 import { capitalize } from '@/client/libs/utils'
 import { SignInSchema } from '@/shared/schemas/auth.schema'
 import { Icon } from '@iconify/react'
@@ -9,7 +9,7 @@ import { Link } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-form-adapter'
 
 const SignInForm = () => {
-  const { signIn, signInError, isSignInError } = useAuth()
+  const { signIn, signInError, isSignInError } = useSignIn()
 
   const form = useForm({
     defaultValues: {
