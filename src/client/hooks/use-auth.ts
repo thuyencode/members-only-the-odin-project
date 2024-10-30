@@ -40,12 +40,16 @@ const useAuth = () => {
     let user: Omit<User, 'salted_hash'> | null = null
 
     if (accessToken) {
-      const decoded = jwtDecode<JwtPayload>(accessToken)
+      try {
+        const decoded = jwtDecode<JwtPayload>(accessToken)
 
-      user = {
-        id: decoded.id,
-        name: decoded.name,
-        username: decoded.username
+        user = {
+          id: decoded.id,
+          name: decoded.name,
+          username: decoded.username
+        }
+      } catch (error) {
+        return user
       }
     }
 

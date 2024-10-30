@@ -21,10 +21,7 @@ const baseApi = ky.create({
     ],
     beforeRetry: [
       async ({ request, error, options }) => {
-        if (
-          error instanceof HTTPError &&
-          error.response.status === Number(HttpStatus.UNAUTHORIZED)
-        ) {
+        if (error instanceof HTTPError) {
           const data = await ky
             .get('get-access-token', { ...options, retry: 0 })
             .json<AccessTokenResponse>()
