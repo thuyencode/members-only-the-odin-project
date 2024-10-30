@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 import HttpError from './HttpError'
 
@@ -9,7 +10,7 @@ import HttpError from './HttpError'
  * @extends {HttpError}
  */
 class BadRequest extends HttpError {
-  constructor(cause: Error | string) {
+  constructor(cause: Error | string | unknown) {
     super(
       httpStatusTextByCode(HttpStatus.BAD_REQUEST),
       HttpStatus.BAD_REQUEST,

@@ -26,7 +26,7 @@ const getAllMessages = expressAsyncHandler(async (req, res) => {
       }
     }
 
-    res.json({ messages })
+    res.json(messages)
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       throw new BadRequest(error)

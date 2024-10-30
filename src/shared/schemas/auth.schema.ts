@@ -10,6 +10,7 @@ export const NameSchema = v.pipe(
 export const UsernameSchema = v.pipe(
   v.string(),
   v.trim(),
+  v.regex(/^\S*$/, 'Username must not contains any white spaces'),
   v.minLength(2, 'Username must be at least 2 characters'),
   v.maxLength(25, 'Username must not exceed 25 characters')
 )

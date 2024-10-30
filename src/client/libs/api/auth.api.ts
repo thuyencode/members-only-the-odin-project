@@ -1,4 +1,8 @@
-import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
+import type {
+  AccessTokenResponse,
+  SignInInput,
+  SignUpInput
+} from '@/shared/types/auth.type'
 import baseApi from './baseApi'
 
 const authApi = baseApi.extend((options) => ({
@@ -7,16 +11,20 @@ const authApi = baseApi.extend((options) => ({
 
 export const postSignUpRequest = async (
   signUpInput: SignUpInput
-): Promise<unknown> => {
-  return await authApi.post('/sign-up', { json: signUpInput }).json()
+): Promise<AccessTokenResponse> => {
+  return await authApi
+    .post('sign-up', { json: signUpInput })
+    .json<AccessTokenResponse>()
 }
 
 export const postSignInRequest = async (
   signInInput: SignInInput
-): Promise<unknown> => {
-  return await authApi.post('/sign-in', { json: signInInput }).json()
+): Promise<AccessTokenResponse> => {
+  return await authApi
+    .post('sign-in', { json: signInInput })
+    .json<AccessTokenResponse>()
 }
 
-export const postSignOutRequest = async (): Promise<void> => {
-  await authApi.post('/sign-out')
+export const getSignOutRequest = async (): Promise<void> => {
+  await authApi.get('sign-out')
 }

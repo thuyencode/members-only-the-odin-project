@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { Link } from '@tanstack/react-router'
 
 const NoMessages = () => {
   return (
@@ -8,9 +9,9 @@ const NoMessages = () => {
         <p>Why don't you be the first one to break the silence? ✍️💌</p>
       </div>
 
-      <button className='btn btn-primary mt-4 text-lg'>
+      <Link className='btn btn-primary mt-4 text-lg' to='/new'>
         New message <Icon className='text-lg' icon='mdi:message-plus' />
-      </button>
+      </Link>
     </div>
   )
 }

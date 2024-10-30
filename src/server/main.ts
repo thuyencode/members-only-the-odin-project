@@ -6,8 +6,12 @@ import helmet from 'helmet'
 import ViteExpress from 'vite-express'
 import env from './libs/utils/env'
 import { error_handler, routes_protector } from './middlewares'
-import { auth_routes, get_messages_routes, protected_routes } from './modules'
-import get_access_token_routes from './modules/get-access-token'
+import {
+  auth_routes,
+  get_access_token_routes,
+  get_messages_routes,
+  protected_routes
+} from './modules'
 
 const PORT = env.PORT || 8080
 

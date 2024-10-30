@@ -9,9 +9,9 @@ interface ShowMessagesProps {
 const ShowMessages: FunctionComponent<ShowMessagesProps> = ({ messages }) => {
   return (
     <div className='space-y-5'>
-      {messages.map((message) => (
+      {messages.map((message, index) => (
         <MessageComp
-          key={`${message.username}+${message.create_time.toString()}`}
+          key={`${message.username}+${message.create_time.toString()}+${index}`}
           {...message}
         />
       ))}

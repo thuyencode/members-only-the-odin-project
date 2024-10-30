@@ -1,7 +1,7 @@
 import BadRequest from '@/server/errors/BadRequest'
 import Unauthorized from '@/server/errors/Unauthorized'
-import { generateTokens } from '@/server/libs/utils/auth'
 import env from '@/server/libs/utils/env'
+import { generateTokens } from '@/server/libs/utils/jwt'
 import type e from 'express'
 import jwt from 'jsonwebtoken'
 

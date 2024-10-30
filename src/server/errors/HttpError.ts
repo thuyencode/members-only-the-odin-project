@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import type { HttpStatus } from 'http-status-ts'
 
 /**
@@ -9,9 +10,13 @@ import type { HttpStatus } from 'http-status-ts'
  */
 class HttpError extends Error {
   statusCode: HttpStatus
-  cause?: Error | string
+  cause?: Error | string | unknown
 
-  constructor(message: string, statusCode: HttpStatus, cause?: Error | string) {
+  constructor(
+    message: string,
+    statusCode: HttpStatus,
+    cause?: Error | string | unknown
+  ) {
     super(message)
     this.statusCode = statusCode
     this.cause = cause

@@ -14,3 +14,15 @@ export interface Message extends v.InferInput<typeof NewMessageInputSchema> {
 }
 
 export type MessageResponse = Message & Omit<User, 'salted_hash' | 'id'>
+
+export type MessagesResponse = MessageResponse[]
+
+export interface ErrorResponse {
+  error: {
+    statusCode: number
+    message: string
+    cause?: string | { [key: string]: string[] }
+  }
+}
+
+export type NewMessageInput = v.InferInput<typeof NewMessageInputSchema>

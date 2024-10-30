@@ -14,46 +14,50 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ProtectedRouteImport } from './routes/_protected/route'
+import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
 const AuthSignUpLazyImport = createFileRoute('/_auth/sign-up')()
 const AuthSignInLazyImport = createFileRoute('/_auth/sign-in')()
 const ProtectednewMessageNewIndexLazyImport = createFileRoute(
-  '/_protected/(new-message)/new/'
+  '/_protected/(new-message)/new/',
 )()
 
 // Create/Update Routes
 
 const ProtectedRouteRoute = ProtectedRouteImport.update({
   id: '/_protected',
-  getParentRoute: () => rootRoute
+  getParentRoute: () => rootRoute,
 } as any)
 
-const IndexLazyRoute = IndexLazyImport.update({
+const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
-  getParentRoute: () => rootRoute
+  getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const AuthSignUpLazyRoute = AuthSignUpLazyImport.update({
+  id: '/_auth/sign-up',
   path: '/sign-up',
-  getParentRoute: () => rootRoute
+  getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/_auth/sign-up.lazy').then((d) => d.Route))
 
 const AuthSignInLazyRoute = AuthSignInLazyImport.update({
+  id: '/_auth/sign-in',
   path: '/sign-in',
-  getParentRoute: () => rootRoute
+  getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/_auth/sign-in.lazy').then((d) => d.Route))
 
 const ProtectednewMessageNewIndexLazyRoute =
   ProtectednewMessageNewIndexLazyImport.update({
+    id: '/(new-message)/new/',
     path: '/new/',
-    getParentRoute: () => ProtectedRouteRoute
+    getParentRoute: () => ProtectedRouteRoute,
   } as any).lazy(() =>
     import('./routes/_protected/(new-message)/new/index.lazy').then(
-      (d) => d.Route
-    )
+      (d) => d.Route,
+    ),
   )
 
 // Populate the FileRoutesByPath interface
@@ -64,7 +68,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+      preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
     '/_protected': {
@@ -89,7 +93,7 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof rootRoute
     }
     '/_protected/(new-message)/new/': {
-      id: '/_protected/new/'
+      id: '/_protected/(new-message)/new/'
       path: '/new'
       fullPath: '/new'
       preLoaderRoute: typeof ProtectednewMessageNewIndexLazyImport
@@ -105,15 +109,15 @@ interface ProtectedRouteRouteChildren {
 }
 
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
-  ProtectednewMessageNewIndexLazyRoute: ProtectednewMessageNewIndexLazyRoute
+  ProtectednewMessageNewIndexLazyRoute: ProtectednewMessageNewIndexLazyRoute,
 }
 
 const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
-  ProtectedRouteRouteChildren
+  ProtectedRouteRouteChildren,
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '': typeof ProtectedRouteRouteWithChildren
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
@@ -121,7 +125,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '': typeof ProtectedRouteRouteWithChildren
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
@@ -130,11 +134,11 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/_protected': typeof ProtectedRouteRouteWithChildren
   '/_auth/sign-in': typeof AuthSignInLazyRoute
   '/_auth/sign-up': typeof AuthSignUpLazyRoute
-  '/_protected/new/': typeof ProtectednewMessageNewIndexLazyRoute
+  '/_protected/(new-message)/new/': typeof ProtectednewMessageNewIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -148,22 +152,22 @@ export interface FileRouteTypes {
     | '/_protected'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
-    | '/_protected/new/'
+    | '/_protected/(new-message)/new/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
+  IndexRoute: typeof IndexRoute
   ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
   AuthSignInLazyRoute: typeof AuthSignInLazyRoute
   AuthSignUpLazyRoute: typeof AuthSignUpLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
+  IndexRoute: IndexRoute,
   ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   AuthSignInLazyRoute: AuthSignInLazyRoute,
-  AuthSignUpLazyRoute: AuthSignUpLazyRoute
+  AuthSignUpLazyRoute: AuthSignUpLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -185,12 +189,12 @@ export const routeTree = rootRoute
       ]
     },
     "/": {
-      "filePath": "index.lazy.tsx"
+      "filePath": "index.tsx"
     },
     "/_protected": {
       "filePath": "_protected/route.tsx",
       "children": [
-        "/_protected/new/"
+        "/_protected/(new-message)/new/"
       ]
     },
     "/_auth/sign-in": {
@@ -199,7 +203,7 @@ export const routeTree = rootRoute
     "/_auth/sign-up": {
       "filePath": "_auth/sign-up.lazy.tsx"
     },
-    "/_protected/new/": {
+    "/_protected/(new-message)/new/": {
       "filePath": "_protected/(new-message)/new/index.lazy.tsx",
       "parent": "/_protected"
     }

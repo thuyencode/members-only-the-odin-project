@@ -1,6 +1,6 @@
 import Users from '@/server/db/users.db'
 import BadRequest from '@/server/errors/BadRequest'
-import { generateTokens } from '@/server/libs/utils/auth'
+import { generateTokens } from '@/server/libs/utils/jwt'
 import { SignInSchema } from '@/shared/schemas/auth.schema'
 import bcrypt from '@node-rs/bcrypt'
 import expressAsyncHandler from 'express-async-handler'

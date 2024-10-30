@@ -38,7 +38,8 @@ const selectJoinUsersTable = async (
 SELECT
   messages.id, messages.user_id, users.username, users.name, messages.message, messages.create_time
 FROM messages
-JOIN users ON messages.user_id = users.id`
+JOIN users ON messages.user_id = users.id
+ORDER BY messages.create_time DESC`
 
   if (limit) {
     sqlQuery += ` LIMIT ${limit}`
