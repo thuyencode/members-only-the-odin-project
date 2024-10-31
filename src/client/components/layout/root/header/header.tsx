@@ -1,10 +1,11 @@
-import useAuth from '@/client/hooks/use-auth'
+import WhenAuthenticatedOrNot from '@/client/components/when-authenticated-or-not'
 import useSignOut from '@/client/hooks/use-sign-out'
 import { Link } from '@tanstack/react-router'
-import ThemeToggler from './theme-toggler'
+import ThemeToggler from '../theme-toggler'
+import UserBadge from '../user-badge'
+import MobileMenuOpener from './mobile-menu-opener'
 
 const Header = () => {
-  const { isAuthenticated, user } = useAuth()
   const { signOut } = useSignOut()
 
   return (
@@ -14,54 +15,63 @@ const Header = () => {
       </div>
 
       <div className='navbar-center'>
-        <ul className='menu menu-horizontal items-center gap-1'>
+        <ul className='menu menu-horizontal items-center gap-1 max-lg:hidden'>
           <li>
             <Link to='/'>Home</Link>
           </li>
 
-          {!isAuthenticated ? (
-            <>
-              <li>
-                <Link to='/sign-up'>Sign Up</Link>
-              </li>
-              <li>
-                <Link className='font-semibold text-primary' to='/sign-in'>
-                  Sign In
-                </Link>
-              </li>
-            </>
-          ) : null}
-
-          {isAuthenticated ? (
-            <>
-              <li>
-                <Link className='font-semibold text-primary' to='/new'>
-                  New Message
-                </Link>
-              </li>
-              <li>
-                <button
-                  className='link link-secondary no-underline'
-                  onClick={signOut}
-                >
-                  Sign Out
-                </button>
-              </li>
-            </>
-          ) : null}
+          <WhenAuthenticatedOrNot
+            whenAuthenticated={
+              <>
+                <li>
+                  <Link className='font-semibold text-primary' to='/new'>
+                    New Message
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    className='link link-secondary no-underline'
+                    onClick={signOut}
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              </>
+            }
+            whenNotAuthenticated={
+              <>
+                <li>
+                  <Link to='/sign-up'>Sign Up</Link>
+                </li>
+                <li>
+                  <Link className='font-semibold text-primary' to='/sign-in'>
+                    Sign In
+                  </Link>
+                </li>
+              </>
+            }
+          />
         </ul>
       </div>
 
       <div className='navbar-end'>
-        <ul className='menu menu-horizontal items-center'>
+        <ul className='menu menu-horizontal items-center max-lg:hidden'>
           <li>
             <ThemeToggler />
           </li>
-          {isAuthenticated ? (
-            <li>
-              <p className='btn btn-link'>@{user?.username}</p>
-            </li>
-          ) : null}
+
+          <WhenAuthenticatedOrNot
+            whenAuthenticated={
+              <li>
+                <UserBadge />
+              </li>
+            }
+          />
+        </ul>
+        <ul className='menu menu-horizontal items-center lg:hidden'>
+          <li>
+            <MobileMenuOpener />
+          </li>
         </ul>
       </div>
     </header>

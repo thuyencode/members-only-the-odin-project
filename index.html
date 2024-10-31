@@ -15,8 +15,19 @@
     <title>Vite + React + TS</title>
   </head>
 
-  <body>
-    <div class="flex min-h-dvh flex-col" id="root"></div>
+  <body class="drawer drawer-end">
+    <input id="mobile-menu-toggle" type="checkbox" class="drawer-toggle" />
+
+    <div class="drawer-content flex min-h-dvh flex-col" id="root"></div>
+
+    <div class="drawer-side lg:hidden" id="mobile-menu">
+      <label
+        for="mobile-menu-toggle "
+        aria-label="close mobile menu"
+        class="drawer-overlay"
+      ></label>
+    </div>
+
     <script type="module" src="/src/client/main.tsx"></script>
   </body>
 </html>

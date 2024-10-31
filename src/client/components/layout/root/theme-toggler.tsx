@@ -9,7 +9,7 @@ const TOGGLE_STATES = {
   dark: { name: 'dark', icon: 'ph:moon-fill', theme: 'dark' }
 }
 
-const ThemeToggle = () => {
+const ThemeToggler = () => {
   const ref = useCloseDialogElement()
   const [toggleState, setToggleState] = useState(TOGGLE_STATES.default)
 
@@ -24,13 +24,13 @@ const ThemeToggle = () => {
   }, [])
 
   return (
-    <details className='dropdown-end md:dropdown' ref={ref}>
+    <details className='lg:dropdown lg:dropdown-end' ref={ref}>
       <summary className='gap-2 capitalize'>
         <Icon className='text-xl' icon={toggleState.icon} />
-        <span className='max-md:hidden'>{toggleState.name}</span>
+        <span>{toggleState.name}</span>
       </summary>
 
-      <ul className='border-base-content/50 md:menu md:dropdown-content md:z-[1] md:w-40 md:rounded-box md:border md:bg-base-300 md:p-2 md:shadow-lg'>
+      <ul className='border-base-content/50 lg:menu lg:dropdown-content lg:z-[1] lg:w-40 lg:rounded-box lg:border lg:bg-base-300 lg:p-2 lg:shadow-lg'>
         {Object.values(TOGGLE_STATES).map((state) => (
           <li key={state.name}>
             <button
@@ -51,4 +51,4 @@ const ThemeToggle = () => {
   )
 }
 
-export default ThemeToggle
+export default ThemeToggler
